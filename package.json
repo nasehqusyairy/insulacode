@@ -1,0 +1,15 @@
+{
+  "name": "insulacode-monorepo",
+  "private": true,
+  "packageManager": "pnpm@11.21.0",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "start": "turbo start --filter=@insulacode/server",
+    "typecheck": "turbo typecheck",
+    "lint": "turbo lint"
+  },
+  "devDependencies": {
+    "turbo": "^2.10.10"
+  }
+}
