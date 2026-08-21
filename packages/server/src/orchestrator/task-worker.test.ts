@@ -53,6 +53,7 @@ describe("TaskWorker", () => {
             fixIterationCount: 0,
             state: "REQUIREMENT",
             outputs: [],
+            events: []
         };
 
         worker.enqueue(task);

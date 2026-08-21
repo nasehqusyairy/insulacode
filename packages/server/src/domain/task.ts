@@ -2,6 +2,10 @@ import type {
     ArtifactRevision,
 } from "./artifact.js";
 
+import type {
+    TaskEvent,
+} from "./event.js";
+
 export type TaskStage =
     | "REQUIREMENT"
     | "PLANNING"
@@ -71,6 +75,8 @@ export interface Task {
     currentStage: TaskStage;
 
     outputs: ArtifactRevision[];
+
+    events: TaskEvent[];
 
     fixIterationCount: number;
 

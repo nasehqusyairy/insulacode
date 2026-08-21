@@ -58,6 +58,7 @@ describe("RequirementStageHandler", () => {
             fixIterationCount: 0,
             state: "REQUIREMENT" as const,
             outputs: [],
+            events: [],
         };
 
         const result =
