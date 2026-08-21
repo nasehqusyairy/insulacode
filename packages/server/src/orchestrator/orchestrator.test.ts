@@ -17,9 +17,28 @@ describe("Orchestrator", () => {
 
     it("delegates a task to its stage handler", async () => {
 
+        const output = {
+            id: "artifact-1",
+            taskId: "task-1",
+            artifactType: "REQUIREMENT",
+            revisionNumber: 1,
+            isCurrent: true,
+            createdAt: "2026-08-21T00:00:00.000Z",
+            approvalState: "PENDING",
+            objective: "Build a project dashboard",
+            requestedBehavior: "A dashboard is available",
+            scope: [],
+            constraints: [],
+            ambiguities: [],
+            assumptions: [],
+            acceptanceIntent: "Dashboard works as requested",
+        };
+
         const run =
             vi.fn()
-                .mockResolvedValue(undefined);
+                .mockResolvedValue({
+                    outputs: [output],
+                });
 
         const requirementHandler:
             StageHandler = {
@@ -42,6 +61,8 @@ describe("Orchestrator", () => {
             userIntent: "Build a project dashboard",
             currentStage: "REQUIREMENT" as const,
             fixIterationCount: 0,
+            state: "REQUIREMENT" as const,
+            outputs: [],
         };
 
         await orchestrator.run({
@@ -53,6 +74,10 @@ describe("Orchestrator", () => {
 
         expect(run)
             .toHaveBeenCalledWith(task);
+
+        expect(task.outputs).toEqual([
+            output,
+        ]);
 
     });
 
@@ -71,6 +96,8 @@ describe("Orchestrator", () => {
                     userIntent: "Build a project dashboard",
                     currentStage: "PLANNING",
                     fixIterationCount: 0,
+                    state: "PLANNING",
+                    outputs: [],
                 },
             }),
         ).rejects.toThrow(

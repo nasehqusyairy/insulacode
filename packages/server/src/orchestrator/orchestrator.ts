@@ -35,8 +35,13 @@ export class Orchestrator {
             );
         }
 
-        await handler.run(
-            context.task,
+        const result =
+            await handler.run(
+                context.task,
+            );
+
+        context.task.outputs.push(
+            ...result.outputs,
         );
 
     }

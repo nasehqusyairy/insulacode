@@ -51,6 +51,8 @@ describe("TaskWorker", () => {
             userIntent: "Build a dashboard",
             currentStage: "REQUIREMENT",
             fixIterationCount: 0,
+            state: "REQUIREMENT",
+            outputs: [],
         };
 
         worker.enqueue(task);

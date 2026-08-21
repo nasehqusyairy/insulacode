@@ -8,6 +8,7 @@ import type {
 
 import type {
     StageHandler,
+    StageResult,
 } from "../stage-handler.js";
 
 export class RequirementStageHandler
@@ -20,13 +21,20 @@ export class RequirementStageHandler
 
     async run(
         task: Task,
-    ): Promise<void> {
+    ): Promise<StageResult> {
 
-        await this.requirementService
-            .createRequirement({
-                taskId: task.id,
-                prompt: task.userIntent,
-            });
+        const requirement =
+            await this.requirementService
+                .createRequirement({
+                    taskId: task.id,
+                    prompt: task.userIntent,
+                });
+
+        return {
+            outputs: [
+                requirement,
+            ],
+        };
 
     }
 

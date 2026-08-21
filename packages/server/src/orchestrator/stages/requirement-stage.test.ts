@@ -17,9 +17,28 @@ describe("RequirementStageHandler", () => {
 
     it("creates a requirement from the task", async () => {
 
+        const requirement = {
+            id: "artifact-1",
+            taskId: "task-1",
+            artifactType: "REQUIREMENT" as const,
+            revisionNumber: 1,
+            isCurrent: true,
+            createdAt: "2026-08-21T00:00:00.000Z",
+            approvalState: "PENDING" as const,
+            objective: "Build a project dashboard",
+            requestedBehavior:
+                "A dashboard is available",
+            scope: [],
+            constraints: [],
+            ambiguities: [],
+            assumptions: [],
+            acceptanceIntent:
+                "Dashboard works as requested",
+        };
+
         const createRequirement =
             vi.fn()
-                .mockResolvedValue({});
+                .mockResolvedValue(requirement);
 
         const requirementService =
             {
@@ -37,9 +56,17 @@ describe("RequirementStageHandler", () => {
             userIntent: "Build a project dashboard",
             currentStage: "REQUIREMENT" as const,
             fixIterationCount: 0,
+            state: "REQUIREMENT" as const,
+            outputs: [],
         };
 
-        await handler.run(task);
+        const result =
+            await handler.run(task);
+
+        expect(result.outputs)
+            .toEqual([
+                requirement,
+            ]);
 
         expect(createRequirement)
             .toHaveBeenCalledOnce();

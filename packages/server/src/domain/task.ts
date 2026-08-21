@@ -1,3 +1,7 @@
+import type {
+    ArtifactRevision,
+} from "./artifact.js";
+
 export type TaskStage =
     | "REQUIREMENT"
     | "PLANNING"
@@ -11,7 +15,9 @@ export type TaskSuspendedState =
     | "FAILED"
     | "CANCELLED";
 
-export type TaskState = TaskStage | TaskSuspendedState;
+export type TaskState =
+    | TaskStage
+    | TaskSuspendedState;
 
 export type ApprovalState =
     | "PENDING"
@@ -42,9 +48,30 @@ export type FailureCategory =
     | "SYSTEM_ERROR";
 
 export interface Task {
+
     id: string;
+
     projectId: string;
+
     userIntent: string;
+
+    /**
+     * Actual state of the task.
+     *
+     * Can be a macro stage or a suspended state.
+     */
+    state: TaskState;
+
+    /**
+     * Original/current macro-stage.
+     *
+     * This is retained when the task enters PAUSED,
+     * FAILED, or CANCELLED.
+     */
     currentStage: TaskStage;
+
+    outputs: ArtifactRevision[];
+
     fixIterationCount: number;
+
 }
