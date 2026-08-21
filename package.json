@@ -7,7 +7,8 @@
     "build": "turbo build",
     "start": "turbo start --filter=@insulacode/server",
     "typecheck": "turbo typecheck",
-    "lint": "turbo lint"
+    "lint": "turbo lint",
+    "test": "vitest"
   },
   "devDependencies": {
     "turbo": "^2.10.10",
