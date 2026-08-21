@@ -10,6 +10,7 @@
     "lint": "turbo lint"
   },
   "devDependencies": {
-    "turbo": "^2.10.10"
+    "turbo": "^2.10.10",
+    "vitest": "^4.1.11"
   }
 }
